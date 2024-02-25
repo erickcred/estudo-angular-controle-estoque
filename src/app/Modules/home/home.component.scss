@@ -1,0 +1,12 @@
+.grid {
+  background-image: url('../../../assets/images/fundoLogin.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+
+  @media (min-width: 1400px) {
+    background-position: top;
+  }
+}
