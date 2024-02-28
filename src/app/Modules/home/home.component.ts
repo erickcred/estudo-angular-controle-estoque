@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { Message, MessageService } from 'primeng/api';
 import { Subject, take, takeUntil } from 'rxjs';
 import { UserCadastroRequest } from 'src/app/Models/Interfaces/User/UserCadastroRequest';
 import { UserCadastroResponse } from 'src/app/Models/Interfaces/User/UserCadastroResponse';
@@ -33,7 +34,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private messageService: MessageService,
   ) {
 
   }
@@ -49,13 +51,27 @@ export class HomeComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (response: UserLoginResponse) => {
             if (response) {
-              alert(`Olá, seja bem vindo ${response.name}!\n ${response.token}`);
-              this.cookieService.set('userToken', response?.token);
               this.formLogin.reset();
+              this.messageService.add({
+                severity: 'success',
+                summary: `Sucesso`,
+                closeIcon: 'pi-times',
+                icon: 'pi-lock-open',
+                detail: `Olá, seja bem vindo ${response.name}!`,
+                life: 10000
+              });
             }
           },
           error: (error: any) => {
-            alert(error.error.error);
+            this.messageService.add({
+              severity: 'error',
+              summary: `Warning`,
+              closeIcon: 'pi-times',
+              icon: 'pi-lock',
+              detail: error.error.error,
+              life: 10000
+            });
+            console.log(error)
           }
         })
     }
@@ -70,18 +86,28 @@ export class HomeComponent implements OnInit, OnDestroy {
           .subscribe({
             next: (response: UserCadastroResponse) => {
               if (response) {
-                console.log(response);
-                alert(`Uasuário ${response.name} criado com sucesso!`)
                 this.formCadastro.reset();
                 this.loginCard = true;
+                this.messageService.add({
+                  severity: 'success',
+                  summary: `Sucesso`,
+                  closeIcon: 'pi-times',
+                  icon: 'pi-lock-open',
+                  detail: `Uasuário ${response.name} criado com sucesso!`,
+                  life: 10000
+                });
               }
             },
             error: (error: any) => {
-              alert(error.error.error);
-              if (error.error.error == 'Email already exists') {
-                this.formCadastro.reset();
-                this.loginCard = true;
-              }
+              this.messageService.add({
+                severity: 'error',
+                summary: `Warning`,
+                closeIcon: 'pi-times',
+                icon: 'pi-lock',
+                detail: error.error.error,
+                life: 10000
+              });
+              if (error.error.error == 'Email already exists')
               console.log(error);
             }
           });
