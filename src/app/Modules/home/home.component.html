@@ -2,7 +2,7 @@
 
   <div class="col-12 flex justify-content-center align-items-center text-align-center">
     <!-- Login -->
-    <form *ngIf="loginCard" [formGroup]="loginForm" (ngSubmit)="fazerLogin()">
+    <form *ngIf="loginCard" [formGroup]="formLogin" (ngSubmit)="fazerLogin()">
       <p-card
         styleClass="mt-10"
         header="Login"
@@ -19,13 +19,13 @@
           <input
             type="password"
             placeholder="Senha"
-            formControlName="senha"
+            formControlName="password"
             pInputText />
         </div>
         <div class="card flex justify-content-center mt-3">
 
           <button
-            [disabled]="!loginForm.valid"
+            [disabled]="!formLogin.valid"
             type="submit"
             pButton
             pRipple>Login</button>
@@ -49,7 +49,7 @@
           <input
             type="text"
             placeholder="Nome"
-            formControlName="nome"
+            formControlName="name"
             pInputText />
         </div>
         <div class="flex justify-content-center align-items-center text-align-center mt-3">
@@ -63,14 +63,14 @@
           <input
             type="password"
             placeholder="Senha"
-            formControlName="senha"
+            formControlName="password"
             pInputText />
         </div>
         <div class="flex justify-content-center align-items-center text-align-center mt-3">
           <input
             type="password"
               placeholder="Confirmar Senha"
-              formControlName="confirmarSenha"
+              formControlName="confirmrPassword"
               pInputText />
         </div>
         <div class="card flex justify-content-center mt-3">
