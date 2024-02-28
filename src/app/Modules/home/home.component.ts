@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (response) {
               alert(`Olá, seja bem vindo ${response.name}!\n ${response.token}`);
               this.cookieService.set('userToken', response?.token);
+              this.formLogin.reset();
             }
           },
           error: (error: any) => {
