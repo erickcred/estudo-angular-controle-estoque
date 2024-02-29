@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Message, MessageService } from 'primeng/api';
-import { Subject, take, takeUntil } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 import { UserCadastroRequest } from 'src/app/Models/Interfaces/User/UserCadastroRequest';
 import { UserCadastroResponse } from 'src/app/Models/Interfaces/User/UserCadastroResponse';
 import { UserLoginRequest } from 'src/app/Models/Interfaces/User/auth/UserLoginRequest';
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private cookieService: CookieService,
     private messageService: MessageService,
+    private router: Router
   ) {
 
   }
@@ -53,6 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (response) {
               this.cookieService.set('userToken', response?.token)
               this.formLogin.reset();
+              this.router.navigate(['/dashboard'])
+
               this.messageService.add({
                 severity: 'success',
                 summary: `Sucesso`,
