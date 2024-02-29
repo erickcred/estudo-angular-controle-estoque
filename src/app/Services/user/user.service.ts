@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, first } from 'rxjs';
 import { UserCadastroRequest } from 'src/app/Models/Interfaces/User/UserCadastroRequest';
 import { UserCadastroResponse } from 'src/app/Models/Interfaces/User/UserCadastroResponse';
@@ -14,7 +15,10 @@ export class UserService {
 
   private apiUrl = environment.urlApi;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
 
   login(userLogin: UserLoginRequest): Observable<UserLoginResponse> {
     return this.http.post<UserLoginResponse>(`${this.apiUrl}/auth`, userLogin).pipe(
@@ -26,5 +30,11 @@ export class UserService {
     return this.http.post<UserCadastroResponse>(`${this.apiUrl}/user`, userCad).pipe(
       first()
     );
+  }
+
+  usuarioLogado(): boolean {
+    let token = this.cookieService.get('userToken');
+
+    return token ? true : false;
   }
 }

@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (response: UserLoginResponse) => {
             if (response) {
+              this.cookieService.set('userToken', response?.token)
               this.formLogin.reset();
               this.messageService.add({
                 severity: 'success',
