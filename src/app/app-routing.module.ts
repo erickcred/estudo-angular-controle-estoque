@@ -3,7 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Modules/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./Modules/dashboard/dashboard.module').then(x => x.DashboardModule)
+  }
 ];
 
 @NgModule({
