@@ -11,7 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
-import { ToolbarModule } from 'primeng/toolbar'
+import { ToolbarModule } from 'primeng/toolbar';
 
 
 

@@ -4,6 +4,7 @@ import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.com
 import { RouterModule } from '@angular/router';
 import { DASHBOARD_ROUTES } from './dashboard.routing';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -14,7 +15,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(DASHBOARD_ROUTES)
+    RouterModule.forChild(DASHBOARD_ROUTES),
+
+    ChartModule,
   ],
   providers: []
 })
