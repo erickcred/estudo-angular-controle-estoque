@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { ProdutcService } from 'src/app/Services/product/produtc.service';
 
 @Component({
   selector: 'app-toolbar-navigation',
@@ -15,6 +16,7 @@ export class ToolbarNavigationComponent implements OnInit, OnDestroy {
   constructor(
     private cookieService: CookieService,
     private messageService: MessageService,
+    private productService: ProdutcService,
     private router: Router,
   ) {}
 

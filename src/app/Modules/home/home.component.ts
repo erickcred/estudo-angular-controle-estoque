@@ -85,8 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   fazerCadastro() {
     if (this.formCadastro.valid) {
       if (this.formCadastro.value.password === this.formCadastro.value.confirmrPassword) {
-        this.userService
-          .cadastrarUsuario(this.formCadastro.value as UserCadastroRequest)
+        this.userService.cadastrarUsuario(this.formCadastro.value as UserCadastroRequest)
           .pipe( takeUntil(this.destroy$) )
           .subscribe({
             next: (response: UserCadastroResponse) => {

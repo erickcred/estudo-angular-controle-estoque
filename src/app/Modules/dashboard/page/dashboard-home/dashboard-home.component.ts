@@ -1,57 +1,118 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChartData, ChartOptions } from 'chart.js';
+import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
+import { GetAllProductResponse } from 'src/app/Models/Interfaces/product/response/GetAllProductResponse';
+import { ProductsDataTransferService } from 'src/app/Services/product/products-data-transfer.service';
+import { ProdutcService } from 'src/app/Services/product/produtc.service';
 
 @Component({
   selector: 'app-dashboard-home',
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.scss']
 })
-export class DashboardHomeComponent implements OnInit {
+export class DashboardHomeComponent implements OnInit, OnDestroy {
+  private readonly destroy$: Subject<void> = new(Subject);
 
-  data: any
+  products: Array<GetAllProductResponse> = []
   options: any
 
-  constructor() {}
+  productsChartData!: ChartData
+  productsChartOptions!: ChartOptions
+
+  constructor(
+    private productService: ProdutcService,
+    private messageService: MessageService,
+    private productsDataTransferService: ProductsDataTransferService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
+    this.listarProdutos();
+  }
+
+  listarProdutos(): void {
+    this.productService.listaProdutos()
+      .pipe( takeUntil(this.destroy$) )
+      .subscribe({
+        next: (response) => {
+          if (response.length > 0) {
+            this.products = response;
+            this.productsDataTransferService.setProductsDatas(this.products);
+            this.setProductsCharConfig();
+          }
+        },
+        error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: `Error`,
+            closeIcon: 'pi-times',
+            icon: 'pi-exclamation-triangle',
+            detail: `Olá, seja bem vindo ${error}!`,
+            life: 10000
+          });
+        }
+      })
+  }
+
+  setProductsCharConfig(): void {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border')
 
-    this.data = {
-      labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-      datasets: [
-          {
-              data: [540, 325, 702, 100, 10, 4000, 3450],
-              backgroundColor: [
-                documentStyle.getPropertyValue('--blue-500'),
-                documentStyle.getPropertyValue('--yellow-500'),
-                documentStyle.getPropertyValue('--green-500'),
-                documentStyle.getPropertyValue('--red-500'),
-                documentStyle.getPropertyValue('--purple-500'),
-                documentStyle.getPropertyValue('--pink-500'),
-                documentStyle.getPropertyValue('--gray-500'),
-              ],
-              hoverBackgroundColor: [
-                documentStyle.getPropertyValue('--blue-400'),
-                documentStyle.getPropertyValue('--yellow-400'),
-                documentStyle.getPropertyValue('--green-400'),
-                documentStyle.getPropertyValue('--red-500'),
-                documentStyle.getPropertyValue('--purple-500'),
-                documentStyle.getPropertyValue('--pink-500'),
-                documentStyle.getPropertyValue('--gray-500'),
-              ]
-          }
-      ]
-    };
+    // if (this.products.length > 0) {
+      this.products.forEach(product => {
+        this.productsChartData = {
+          labels: this.products.map(product => product.name),
+          datasets: [{
+            label: 'Quantidade',
+            backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
+            hoverBackgroundColor: documentStyle.getPropertyValue('--indigo-200'),
+            borderColor: documentStyle.getPropertyValue('--indigo-400'),
+            data: this.products.map(product => product?.amount)
+          }]
+        };
+      })
 
-    this.options = {
-      plugins: {
+      this.productsChartOptions = {
+        maintainAspectRatio: false,
+        aspectRatio: 0.8,
+        plugins: {
           legend: {
-              labels: {
-                  usePointStyle: true,
-                  color: textColor
-              }
+            labels: {
+              color: textColor
+            }
           }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: textColorSecondary,
+              font: {
+                weight: 'bold'
+              }
+            },
+            grid: {
+              color: surfaceBorder
+            }
+          },
+          y: {
+            ticks: {
+              color: textColorSecondary,
+            },
+            grid: {
+              color: surfaceBorder
+            }
+          }
+        },
       }
-  };
+    // }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

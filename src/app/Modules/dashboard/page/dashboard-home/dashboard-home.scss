@@ -4,23 +4,23 @@
   height: 100vmax;
   padding-bottom: 250px;
 
-  div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+//   div {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     align-items: center;
+//     gap: 10px;
 
-    @media (max-width: 680px) {
-      justify-content: center;
-    }
+//     @media (max-width: 680px) {
+//       justify-content: center;
+//     }
 
-    & .p-element.p-chart {
-      @media (max-width: 680px)
-      {
-        width: 100%;
-        height: fit-content;
-      }
-    }
-  }
+//     & .p-element.p-chart {
+//       @media (max-width: 680px)
+//       {
+//         width: 100%;
+//         height: fit-content;
+//       }
+//     }
+//   }
 }

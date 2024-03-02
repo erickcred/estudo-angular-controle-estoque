@@ -2,63 +2,19 @@
 
 
 <div class="containerContent">
-  <div>
-    <p-chart
-      class="p-chart"
-      type="bar"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
+  <div class="gri">
+    <div class="col-12">
+      <p-card
+        header="Quantidade de produtos em estoque"
+        styleClass="shadow-3 m5 text-indigo-800">
 
-    <p-chart
-      class="p-chart"
-      type="pie"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
-
-    <p-chart
-      class="p-chart"
-      type="doughnut"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
-
-    <p-chart
-      class="p-chart"
-      type="bar"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
-
-    <p-chart
-      class="p-chart"
-      type="doughnut"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
-
-    <p-chart
-      class="p-chart"
-      type="radar"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
-
-    <p-chart
-      class="p-chart"
-      type="line"
-      [data]="data"
-      [options]="options"
-    ></p-chart>
-
-    <p-chart
-      class="p-chart"
-      type="line"
-      [data]="data"
-      ariaLabbel="Data"
-    ></p-chart>
-
-
+        <p-chart
+          class="p-chart"
+          type="bar"
+          [data]="productsChartData"
+          [options]="productsChartOptions"
+        ></p-chart>
+      </p-card>
+    </div>
   </div>
 </div>
