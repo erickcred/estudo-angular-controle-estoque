@@ -1,0 +1,8 @@
+.exact_router {
+  button {
+    background-color: #6372c3!important;
+  }
+  :host ::ng-deep .dropdown {
+    width: 50%;
+  }
+}
