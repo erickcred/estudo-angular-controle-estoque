@@ -3,10 +3,23 @@
 
 <div class="containerContent">
   <div class="gri">
-    <div class="col-12">
+    <div class="col-12" style="position: relative">
       <p-card
         header="Quantidade de produtos em estoque"
         styleClass="shadow-3 text-indigo-800">
+
+        <div
+          class="flex align-items-center justify-content-end"
+          style="position: absolute; top: 16px; right: 16px"
+        >
+          <p-button
+            icon="pi pi-refresh"
+            title="Atualizar"
+            pTooltip="Atualizar tabela"
+            tooltipPosition="top"
+            (click)="atualizaTabela()"
+          ></p-button>
+        </div>
 
         <p-chart
           class="p-chart"
@@ -14,6 +27,7 @@
           [data]="productsChartData"
           [options]="productsChartOptions"
         ></p-chart>
+
       </p-card>
     </div>
   </div>

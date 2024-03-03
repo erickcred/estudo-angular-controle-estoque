@@ -51,19 +51,19 @@ export class ProductsHomeComponent implements OnInit, OnDestroy {
       this.productsList = productsLoad;
     }
     else {
-      this.listaProdutos()
+      this.atualizaTabela();
     }
   }
 
-  listaProdutos() {
-    this.productService.listaProdutos()
+  atualizaTabela() {
+    console.log('Iniciando atualização da tabela')
+    this.productService.listarProdutos()
       .pipe( takeUntil(this.destroy$) )
       .subscribe({
         next: (response: Array<GetAllProductResponse>) => {
           if (response.length > 0) {
-            this.productsList = response
-            this.produtcsDataTransferService.setProductsDatas(this.productsList)
-            console.log(this.productsList)
+            this.productsList = response;
+            this.produtcsDataTransferService.setProductsDatas(this.productsList);
           }
         },
         error: (error: any) => {
@@ -78,7 +78,21 @@ export class ProductsHomeComponent implements OnInit, OnDestroy {
           console.log(error)
           this.router.navigate(['/dashboard'])
         }
-      })
+      });
+  }
+
+  adicionaProduto() {
+    console.log('Adicionar produto')
+  }
+
+  atualizaProduto(productId: any): void {
+    console.log('Atualizando:');
+    console.log(productId)
+  }
+
+  deletaProduto(productId: any): void {
+    console.log('Deletando:');
+    console.log(productId)
   }
 
 

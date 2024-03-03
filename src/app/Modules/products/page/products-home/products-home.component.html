@@ -3,6 +3,10 @@
 <div class="containerContent">
   <app-produtcts-table
     [productData]="productsList"
-    (atualizarLista)="listaProdutos()"
+
+    (atualizarTabela)="atualizaTabela()"
+    (adicionarProduto)="adicionaProduto()"
+    (atualizarProduto)="atualizaProduto($event)"
+    (deletarProduto)="deletaProduto($event)"
   ></app-produtcts-table>
 </div>

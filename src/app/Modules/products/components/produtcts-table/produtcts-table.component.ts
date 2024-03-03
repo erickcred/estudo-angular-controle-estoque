@@ -9,12 +9,28 @@ import { GetAllProductResponse } from 'src/app/Models/Interfaces/product/respons
 export class ProdutctsTableComponent {
 
   @Input() productData: Array<GetAllProductResponse> = [];
-  @Output() atualizarLista = new EventEmitter<any>();
+
+  @Output() atualizarTabela = new EventEmitter<any>();
+  @Output() adicionarProduto = new EventEmitter<any>();
+  @Output() atualizarProduto = new EventEmitter<any>();
+  @Output() deletarProduto = new EventEmitter<any>();
 
   productSelected!: GetAllProductResponse
 
-  listaProdutos() {
-    this.atualizarLista.emit()
+  atualizaTabela() {
+    this.atualizarTabela.emit()
+  }
+
+  adicionaProduto() {
+    this.adicionarProduto.emit()
+  }
+
+  atualizaProduto(product: any) {
+    this.atualizarProduto.emit(product)
+  }
+
+  deletaProduto(product: any) {
+    this.deletarProduto.emit(product)
   }
 
   getSeverity(status: number): any {

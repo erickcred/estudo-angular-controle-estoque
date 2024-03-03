@@ -24,11 +24,21 @@ export class ProdutcService {
     private cookieService: CookieService,
   ) { }
 
-  listaProdutos(): Observable<Array<GetAllProductResponse>> {
+  listarProdutos(): Observable<Array<GetAllProductResponse>> {
     return this.http.get<Array<GetAllProductResponse>>(`${this.apiUrl}/products`, this.httpOptions)
     .pipe(
       first(),
       // map(product => product.filter(x => x.amount > 0))
     );
+  }
+
+  editarProduto(product: any): Observable<GetAllProductResponse> {
+    return this.http.put<GetAllProductResponse>(`${this.apiUrl}/product/edit`, this.httpOptions)
+      .pipe( first() )
+  }
+
+  deletarProduto(product: any): Observable<GetAllProductResponse> {
+    return this.http.delete<GetAllProductResponse>(`${this.apiUrl}/product/edit`, this.httpOptions)
+      .pipe( first() )
   }
 }

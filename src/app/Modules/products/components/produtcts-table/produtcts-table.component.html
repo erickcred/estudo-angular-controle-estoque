@@ -29,13 +29,14 @@
                 tooltipPosition="top"
                 label="Adicionar"
                 styleClass="p-button-text"
+                (click)="adicionaProduto()"
             ></p-button>
             <p-button
               icon="pi pi-refresh"
               title="Atualizar"
               pTooltip="Atualizar tabela"
               tooltipPosition="top"
-              (click)="listaProdutos()"
+              (click)="atualizaTabela()"
             ></p-button>
           </div>
         </ng-template>
@@ -139,6 +140,7 @@
                   class="p-button-rounded p-button-warning"
                   pTooltip="Editar produto"
                   tooltipPosition="top"
+                  (click)="atualizaProduto(product.id)"
                 ></button>
                 <button
                   pButton
@@ -147,6 +149,7 @@
                   class="p-button-rounded p-button-danger"
                   pTooltip="Excluir produto"
                   tooltipPosition="top"
+                  (click)="deletaProduto(product.id)"
                 ></button>
               </div>
             </td>

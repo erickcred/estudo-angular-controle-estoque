@@ -31,7 +31,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
   }
 
   listarProdutos(): void {
-    this.productService.listaProdutos()
+    this.productService.listarProdutos()
       .pipe( takeUntil(this.destroy$) )
       .subscribe({
         next: (response) => {
@@ -60,53 +60,55 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border')
 
-    // if (this.products.length > 0) {
-      this.products.forEach(product => {
-        this.productsChartData = {
-          labels: this.products.map(product => product.name),
-          datasets: [{
-            label: 'Quantidade',
-            backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
-            hoverBackgroundColor: documentStyle.getPropertyValue('--indigo-200'),
-            borderColor: documentStyle.getPropertyValue('--indigo-400'),
-            data: this.products.map(product => product?.amount)
-          }]
-        };
-      })
+    this.products.forEach(product => {
+      this.productsChartData = {
+        labels: this.products.map(product => product.name),
+        datasets: [{
+          label: 'Quantidade',
+          backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
+          hoverBackgroundColor: documentStyle.getPropertyValue('--indigo-200'),
+          borderColor: documentStyle.getPropertyValue('--indigo-400'),
+          data: this.products.map(product => product?.amount)
+        }]
+      };
+    })
 
-      this.productsChartOptions = {
-        maintainAspectRatio: false,
-        aspectRatio: 0.8,
-        plugins: {
-          legend: {
-            labels: {
-              color: textColor
-            }
+    this.productsChartOptions = {
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: {
+        legend: {
+          labels: {
+            color: textColor
           }
-        },
-        scales: {
-          x: {
-            ticks: {
-              color: textColorSecondary,
-              font: {
-                weight: 'bold'
-              }
-            },
-            grid: {
-              color: surfaceBorder
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 'bold'
             }
           },
-          y: {
-            ticks: {
-              color: textColorSecondary,
-            },
-            grid: {
-              color: surfaceBorder
-            }
+          grid: {
+            color: surfaceBorder
           }
         },
-      }
-    // }
+        y: {
+          ticks: {
+            color: textColorSecondary,
+          },
+          grid: {
+            color: surfaceBorder
+          }
+        }
+      },
+    }
+  }
+
+  atualizaTabela() {
+    this.listarProdutos();
   }
 
   ngOnDestroy(): void {
