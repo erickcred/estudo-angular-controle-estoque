@@ -109,6 +109,15 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
 
   atualizaTabela() {
     this.listarProdutos();
+
+    this.messageService.add({
+      severity: 'success',
+      summary: `Success`,
+      closeIcon: 'pi-times',
+      icon: '',
+      detail: "Grafico Produtos atualizado!",
+      life: 2000
+    });
   }
 
   ngOnDestroy(): void {
