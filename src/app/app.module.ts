@@ -10,6 +10,10 @@ import { PrimeComponentsModule } from './shared/prime-components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { CurrencyPipe } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,13 @@ import { RouterModule } from '@angular/router';
     // PrimeNG
     PrimeComponentsModule,
   ],
-  providers: [],
+  providers: [
+    MessageService,
+    CookieService,
+    ConfirmationService,
+    DialogService,
+    CurrencyPipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

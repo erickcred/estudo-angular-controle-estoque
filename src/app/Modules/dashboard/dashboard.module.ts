@@ -18,20 +18,13 @@ import { DialogService } from 'primeng/dynamicdialog';
   ],
   imports: [
     CommonModule,
-    SharedModule,
     RouterModule.forChild(DASHBOARD_ROUTES),
 
-    ChartModule,
+    SharedModule,
 
     // Prime
     PrimeComponentsModule,
   ],
-  providers: [
-    MessageService,
-    CookieService,
-    ConfirmationService,
-    DialogService,
-    CurrencyPipe,
-  ]
+  providers: []
 })
 export class DashboardModule { }

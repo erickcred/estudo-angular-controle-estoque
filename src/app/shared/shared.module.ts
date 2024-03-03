@@ -29,12 +29,6 @@ import { PrimeComponentsModule } from './prime-components.module';
   exports: [
     ToolbarNavigationComponent,
   ],
-  providers: [
-    MessageService,
-    CookieService,
-    ConfirmationService,
-    DialogService,
-    CurrencyPipe,
-  ]
+  providers: []
 })
 export class SharedModule { }

@@ -1,6 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -18,6 +16,7 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag'
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -42,13 +41,8 @@ import { TagModule } from 'primeng/tag'
     TooltipModule,
     TableModule,
     TagModule,
+    ChartModule,
   ],
-  providers: [
-    MessageService,
-    CookieService,
-    ConfirmationService,
-    DialogService,
-    CurrencyPipe,
-  ]
+  providers: []
 })
 export class PrimeComponentsModule { }
