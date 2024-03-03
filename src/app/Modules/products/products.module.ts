@@ -1,33 +1,35 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { PrimeComponentsModule } from 'src/app/shared/prime-components.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-import { ToolbarNavigationComponent } from './components/toolbar-navigation/toolbar-navigation.component';
-import { PrimeComponentsModule } from './prime-components.module';
+import { ProductsHomeComponent } from './page/products-home/products-home.component';
+import { PRODUCTS_ROUTES } from './products.routing';
+import { ProdutctsTableComponent } from './components/produtcts-table/produtcts-table.component';
 
 
 
 @NgModule({
   declarations: [
-    ToolbarNavigationComponent
+    ProductsHomeComponent,
+    ProdutctsTableComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule,
+    RouterModule.forChild(PRODUCTS_ROUTES),
+
+    SharedModule,
 
     // PrimeNG
     PrimeComponentsModule,
-  ],
-  exports: [
-    ToolbarNavigationComponent,
+
   ],
   providers: [
     MessageService,
@@ -37,4 +39,4 @@ import { PrimeComponentsModule } from './prime-components.module';
     CurrencyPipe,
   ]
 })
-export class SharedModule { }
+export class ProductsModule { }

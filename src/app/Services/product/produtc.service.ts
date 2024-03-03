@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, first, map, pipe, tap } from 'rxjs';
+import { Observable, first, map } from 'rxjs';
 import { GetAllProductResponse } from 'src/app/Models/Interfaces/product/response/GetAllProductResponse';
 import { environment } from 'src/environments/environment';
 
@@ -28,7 +28,7 @@ export class ProdutcService {
     return this.http.get<Array<GetAllProductResponse>>(`${this.apiUrl}/products`, this.httpOptions)
     .pipe(
       first(),
-      map(product => product.filter(x => x.amount > 0))
+      // map(product => product.filter(x => x.amount > 0))
     );
   }
 }

@@ -5,3 +5,14 @@
 body {
   overflow: hidden;
 }
+
+.containerContent {
+  overflow-y: auto;
+  width: 100%;
+  height: 100vmax;
+  padding-bottom: 250px;
+}
+
+.text-nowrap {
+  text-wrap: nowrap;
+}

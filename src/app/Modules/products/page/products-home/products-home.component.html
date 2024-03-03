@@ -1,0 +1,8 @@
+<app-toolbar-navigation></app-toolbar-navigation>
+
+<div class="containerContent">
+  <app-produtcts-table
+    [productData]="productsList"
+    (atualizarLista)="listaProdutos()"
+  ></app-produtcts-table>
+</div>

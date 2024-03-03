@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
@@ -25,7 +24,6 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
     private productService: ProdutcService,
     private messageService: MessageService,
     private productsDataTransferService: ProductsDataTransferService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {

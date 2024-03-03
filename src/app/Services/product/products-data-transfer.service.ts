@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, take, tap } from 'rxjs';
+import { BehaviorSubject, map, take } from 'rxjs';
 import { GetAllProductResponse } from "src/app/Models/Interfaces/product/response/GetAllProductResponse";
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ProductsDataTransferService {
     this.productsDataEmitter$
       .pipe(
         take(1),
-        map(products => products?.filter(product => product.amount > 0)),
+        // map(products => products?.filter(product => product.amount > 0)),
       )
       .subscribe({
         next: (response) => {
