@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, first, map } from 'rxjs';
+import { DeleteProductResponse } from 'src/app/Models/Interfaces/product/response/DeleteProductResponse';
 import { GetAllProductResponse } from 'src/app/Models/Interfaces/product/response/GetAllProductResponse';
 import { environment } from 'src/environments/environment';
 
@@ -32,13 +33,19 @@ export class ProdutcService {
     );
   }
 
-  editarProduto(product: any): Observable<GetAllProductResponse> {
+  editarProduto(product: GetAllProductResponse): Observable<GetAllProductResponse> {
     return this.http.put<GetAllProductResponse>(`${this.apiUrl}/product/edit`, this.httpOptions)
-      .pipe( first() )
+      .pipe( first() );
   }
 
-  deletarProduto(product: any): Observable<GetAllProductResponse> {
-    return this.http.delete<GetAllProductResponse>(`${this.apiUrl}/product/edit`, this.httpOptions)
-      .pipe( first() )
+  deletarProduto(product: GetAllProductResponse): Observable<DeleteProductResponse> {
+    console.log(product.id)
+    return this.http.delete<DeleteProductResponse>(
+      `${this.apiUrl}/product/delete`,
+      {
+        ...this.httpOptions,
+        params: { produtc_id: product.id, }
+      })
+      .pipe( first() );
   }
 }
