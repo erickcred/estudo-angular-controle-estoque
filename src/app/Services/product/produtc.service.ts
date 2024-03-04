@@ -44,7 +44,7 @@ export class ProdutcService {
       `${this.apiUrl}/product/delete`,
       {
         ...this.httpOptions,
-        params: { produtc_id: product.id, }
+        params: { product_id: product.id, }
       })
       .pipe( first() );
   }
